@@ -36,8 +36,7 @@ public class AllMusicServer {
 
     public static final String dir = "config/allmusic_server/";
 
-    private static final GsonComponentSerializer GSON_SERIALIZER = GsonComponentSerializer.builder()
-            .build();
+    private static final GsonComponentSerializer GSON_SERIALIZER = GsonComponentSerializer.gsonLegacy();
 
     public static MutableComponent parse(Component input) {
         String json = GSON_SERIALIZER.serialize(input);
