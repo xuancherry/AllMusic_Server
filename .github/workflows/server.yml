@@ -4,6 +4,28 @@
 # documentation.
 # This workflow will build a Java project with Gradle and cache/restore any dependencies to improve the workflow execution time
 # For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-java-with-gradle
+name: AllMusic Server
+
+on:
+  push:
+    branches:    
+      - 'releases/**'
+    tags:        
+      - '*'
+  workflow_dispatch:  # 👈 添加这一行就可以手动执行了
+    inputs:
+      build_all:
+        description: '构建所有版本'
+        required: false
+        default: true
+        type: boolean
+
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
+# This workflow will build a Java project with Gradle and cache/restore any dependencies to improve the workflow execution time
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-java-with-gradle
 
 name: AllMusic Server
 
@@ -86,11 +108,11 @@ jobs:
     - name: build
       shell: cmd
       run: |
-        link.cmd && cd velocity && gradlew shadowJar
+        link.cmd && cd server_top && gradlew shadowJar
     - name: update
       uses: actions/upload-artifact@v4
       with:
-        name: "allmusic_server_velocity"
+        name: "allmusic_server_bungeecord_velocity"
         path: build/libs/
   build_fabric_1_16_5:
     runs-on: windows-latest
